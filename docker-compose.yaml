@@ -8,7 +8,11 @@ services:
     networks:
       - spring-mysql-network
     environment:
-      MYSQL_HOST: mysql_server
+      DATABASE_HOST: mysql_server
+      DATABASE_USER: root
+      DATABASE_PASSWORD: password
+      DATABASE_NAME: quotes
+      DATABASE_PORT: 3306
     depends_on:
       - mysql_server
 
@@ -21,8 +25,10 @@ services:
       - spring-mysql-network
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: quotes
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
 
   # For development
   phpmyadmin:

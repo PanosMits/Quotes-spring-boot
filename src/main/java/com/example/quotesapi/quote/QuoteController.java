@@ -1,15 +1,28 @@
 package com.example.quotesapi.quote;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path="api/v1/quote")
 public class QuoteController {
 
-    @GetMapping(path = "/all")
+    private final QuoteService quoteService;
+
+    @Autowired
+    public QuoteController(QuoteService quoteService) {
+        this.quoteService = quoteService;
+    }
+
+    @PostMapping(path = "/create")
+    public ResponseEntity<String> create(@RequestBody Quote quote) {
+        quoteService.saveQuote(quote);
+        return ResponseEntity.ok("Quote created successfully.");
+    }
+
+    @GetMapping(path = "/test")
     public String test() {
-        return "Test 2";
+        return "TEST";
     }
 }
