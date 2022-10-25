@@ -1,0 +1,39 @@
+version: "3"
+services:
+  spring_api:
+    container_name: quotes-api
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-mysql-network
+    environment:
+      MYSQL_HOST: mysql_server
+    depends_on:
+      - mysql_server
+
+  mysql_server:
+    container_name: mysql-server
+    image: mysql:8
+    ports:
+      - "3306:3306"
+    networks:
+      - spring-mysql-network
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: quotes
+
+  # For development
+  phpmyadmin:
+    container_name: phpmyadmin-container
+    image: phpmyadmin/phpmyadmin
+    networks:
+      - spring-mysql-network
+    ports:
+      - "8083:80"
+    environment:
+      PMA_HOSTS: mysql-server # This has to match the container name
+
+networks:
+  spring-mysql-network:
