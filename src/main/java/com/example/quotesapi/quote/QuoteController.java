@@ -36,4 +36,10 @@ public class QuoteController {
     public Optional<Quote> getQuote(@PathVariable("quoteId") Long quoteId) {
         return quoteService.getById(quoteId);
     }
+
+    @DeleteMapping(path = "/delete/{quoteId}")
+    public ResponseEntity<String> delete(@PathVariable("quoteId") Long quoteId) {
+        quoteService.deleteQuote(quoteId);
+        return ResponseEntity.ok("Quote deleted successfully.");
+    }
 }

@@ -39,4 +39,9 @@ public class QuoteService {
         if(!quoteRepository.existsById(quoteId)) throw new QuoteNotFoundException();
         return quoteRepository.findById(quoteId);
     }
+
+    public void deleteQuote(Long quoteId) {
+        if(!quoteRepository.existsById(quoteId)) throw new QuoteNotFoundException();
+        quoteRepository.deleteById(quoteId);
+    }
 }
