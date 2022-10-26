@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class QuoteService {
@@ -32,5 +33,10 @@ public class QuoteService {
         if (author != null && author.length() > 0) {
             quote.setAuthor(author);
         }
+    }
+
+    public Optional<Quote> getById(Long quoteId) {
+        if(!quoteRepository.existsById(quoteId)) throw new QuoteNotFoundException();
+        return quoteRepository.findById(quoteId);
     }
 }

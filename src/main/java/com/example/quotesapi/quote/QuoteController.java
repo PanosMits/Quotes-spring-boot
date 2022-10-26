@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping(path="api/v1/quote")
 public class QuoteController {
@@ -28,5 +30,10 @@ public class QuoteController {
             @RequestParam(required = false) String text) {
         quoteService.updateQuote(quoteId, author, text);
         return ResponseEntity.ok("Quote updated successfully.");
+    }
+
+    @GetMapping(path = "/get/{quoteId}")
+    public Optional<Quote> getQuote(@PathVariable("quoteId") Long quoteId) {
+        return quoteService.getById(quoteId);
     }
 }
