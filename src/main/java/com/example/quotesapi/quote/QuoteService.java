@@ -26,10 +26,10 @@ public class QuoteService {
     public void updateQuote(Long quoteId, String author, String text) {
         Quote quote = quoteRepository.findById(quoteId).orElseThrow(QuoteNotFoundException::new);
 
-        if (text == null || text.length() < 1) {
-            throw new IllegalStateException("Please provide some text.");
+        if (text != null && text.length() > 0) {
+            quote.setText(text);
         }
-        quote.setText(text);
+
 
         if (author != null && author.length() > 0) {
             quote.setAuthor(author);
