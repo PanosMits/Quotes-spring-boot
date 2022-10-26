@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -43,5 +44,11 @@ public class QuoteService {
     public void deleteQuote(Long quoteId) {
         if(!quoteRepository.existsById(quoteId)) throw new QuoteNotFoundException();
         quoteRepository.deleteById(quoteId);
+    }
+
+    public Optional<Quote> getRandomQuote() {
+        List<Quote> quotes = quoteRepository.findAll();
+        if (quotes.isEmpty()) throw new QuoteNotFoundException();
+        return quoteRepository.getRandom();
     }
 }

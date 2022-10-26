@@ -42,4 +42,9 @@ public class QuoteController {
         quoteService.deleteQuote(quoteId);
         return ResponseEntity.ok("Quote deleted successfully.");
     }
+
+    @GetMapping(path = "/get-random")
+    public Optional<Quote> getRandom() {
+        return quoteService.getRandomQuote();
+    }
 }
