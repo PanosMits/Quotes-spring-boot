@@ -51,4 +51,10 @@ public class QuoteService {
         if (quotes.isEmpty()) throw new QuoteNotFoundException();
         return quoteRepository.getRandom();
     }
+
+    public List<Quote> getAll() {
+        List<Quote> quotes = quoteRepository.findAll();
+        if (quotes.isEmpty()) throw new QuoteNotFoundException();
+        return quoteRepository.findAll();
+    }
 }
