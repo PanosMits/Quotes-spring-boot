@@ -57,4 +57,8 @@ public class QuoteService {
         if (quotes.isEmpty()) throw new QuoteNotFoundException();
         return quoteRepository.findAll();
     }
+
+    public Optional<List<Quote>> getQuotesContaining(String text) {
+        return quoteRepository.getQuotesContaining(text);
+    }
 }

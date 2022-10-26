@@ -54,4 +54,9 @@ public class QuoteController {
         List<Quote> quotes = quoteService.getAll();
         return ResponseEntity.ok(quotes);
     }
+
+    @GetMapping(path = "/get-all-containing/{text}")
+    public Optional<List<Quote>> getQuotesContaining(@PathVariable("text") String text) {
+        return quoteService.getQuotesContaining(text);
+    }
 }
