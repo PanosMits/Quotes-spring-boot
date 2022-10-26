@@ -21,8 +21,12 @@ public class QuoteController {
         return ResponseEntity.ok("Quote created successfully.");
     }
 
-    @GetMapping(path = "/test")
-    public String test() {
-        return "TEST";
+    @PutMapping(path = "/update/{quoteId}")
+    public ResponseEntity<String> update(
+            @PathVariable() Long quoteId,
+            @RequestParam(required = false) String author,
+            @RequestParam(required = false) String text) {
+        quoteService.updateQuote(quoteId, author, text);
+        return ResponseEntity.ok("Quote updated successfully.");
     }
 }
