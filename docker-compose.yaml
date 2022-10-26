@@ -25,10 +25,8 @@ services:
       - spring-mysql-network
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: quotes
-      MYSQL_USER: root
-      MYSQL_PASSWORD: password
 
   # For development
   phpmyadmin:
